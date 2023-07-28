@@ -31,13 +31,7 @@ function activate(context) {
 
 			const heirarchy = TSD_HELPER.getHeirarchy(fullText, lineNumber, document);
 
-			
-			//TODO FIX LINE SETTER
-			editor.edit(editBuilder => {
-				editBuilder.insert(new vscode.Position(lineNumber+1, ';'), `\nSystem.debug('Line: ${lineNumber+1} | ${heirarchy} -> ${text} '+${text});`);
-			});
-
-			// vscode.window.showInformationMessage(`LINE: ${lineNumber} ${heirarchy} -> ${text}`);
+			TSD_HELPER.insertSystemDebug(lineNumber, text, heirarchy);
 
 		} catch (error) {
 			vscode.window.showErrorMessage(error);

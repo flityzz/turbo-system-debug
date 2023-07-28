@@ -1,3 +1,5 @@
+const vscode = require('vscode');
+
 const getHeirarchy = (fullText, lineNumber, document) => {
     
     const fileName = getFileName(document.fileName);
@@ -33,6 +35,29 @@ const getHeirarchy = (fullText, lineNumber, document) => {
     return `${fileName} -> ${String(heirarchy[0])} `;
 }
 
+const insertSystemDebug = (lineNumber, text, hierarchy) => {
+    const activeEditor = vscode.window.activeTextEditor;
+    if (!activeEditor) {
+        return; 
+    }
+
+    activeEditor.edit(editBuilder => {
+        
+        let currentLine = lineNumber;
+        const document = activeEditor.document;
+        while (currentLine < document.lineCount) {
+            const lineText = document.lineAt(currentLine).text;
+            const semicolonIndex = lineText.indexOf(';', 0);
+            if (semicolonIndex !== -1) {
+                const position = new vscode.Position(currentLine, semicolonIndex + 1);
+                editBuilder.insert(position, `\nSystem.debug('Line: ${currentLine + 1} | ${hierarchy} -> ${text} '+${text});`);
+                break;
+            }
+            currentLine++;
+        }
+    });
+}
+
 const getFileName = (fileName) => {
 
     const parts = fileName.split('\\');
@@ -47,5 +72,6 @@ const getFileName = (fileName) => {
 
 
 module.exports = {
-    getHeirarchy
+    getHeirarchy,
+    insertSystemDebug
 }
