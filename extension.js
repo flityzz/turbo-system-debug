@@ -32,7 +32,7 @@ function activate(context) {
 			const lineNumber = selection.active.line;
 			const fullText = document.lineAt(selection.end.line).text;
 			const heirarchy = TSD_HELPER.getHeirarchy(fullText, lineNumber, document)
-			vscode.window.showInformationMessage(`${heirarchy} ${text}`);
+			vscode.window.showInformationMessage(`LINE: ${lineNumber} ${heirarchy} -> ${text}`);
 
 		} catch (error) {
 			vscode.window.showErrorMessage(error);
