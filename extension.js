@@ -38,6 +38,7 @@ function activate(context) {
 			const characterEnd = document.lineAt(correctedLineNumber).range.end.character;
 			const spaces = ' '.repeat(indent);
 
+			//TODO FIX LINE SETTER
 			editor.edit(editBuilder => {
 				editBuilder.insert(new vscode.Position(correctedLineNumber, characterEnd), `\n${spaces}System.debug("Line: ${correctedLineNumber + 2} | ${heirarchy} -> ${text} "+${text});`);
 			});
