@@ -24,13 +24,12 @@ function activate(context) {
 		try {
 			if(!editor){
 				throw 'No active editor!';
-
-			}else{				
-				const document = editor.document;
-				const selection = editor.selections[0];
-				const text = document.getText(selection);
-				vscode.window.showInformationMessage(text);
 			}
+
+			const document = editor.document;
+			const selection = editor.selections[0];
+			const text = document.getText(selection);
+			vscode.window.showInformationMessage(text);
 
 		} catch (error) {
 			vscode.window.showErrorMessage(error);
