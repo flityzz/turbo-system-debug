@@ -29,7 +29,10 @@ function activate(context) {
 			const document = editor.document;
 			const selection = editor.selections[0];
 			const text = document.getText(selection);
-			vscode.window.showInformationMessage(text);
+			const lineNumber = selection.active.line;
+			const fullText = document.lineAt(selection.end.line).text;
+			const heirarchy = TSD_HELPER.getHeirarchy(fullText, lineNumber, document)
+			vscode.window.showInformationMessage(`${heirarchy} ${text}`);
 
 		} catch (error) {
 			vscode.window.showErrorMessage(error);
