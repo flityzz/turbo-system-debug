@@ -31,8 +31,18 @@ function activate(context) {
 			const text = document.getText(selection);
 			const lineNumber = selection.active.line;
 			const fullText = document.lineAt(selection.end.line).text;
-			const heirarchy = TSD_HELPER.getHeirarchy(fullText, lineNumber, document)
-			vscode.window.showInformationMessage(`LINE: ${lineNumber} ${heirarchy} -> ${text}`);
+
+			const heirarchy = TSD_HELPER.getHeirarchy(fullText, lineNumber, document);
+
+			const { correctedLineNumber, indent } = TSD_HELPER.getLineNumberAndIndentToPrint(fullText, lineNumber, document);
+			const characterEnd = document.lineAt(correctedLineNumber).range.end.character;
+			const spaces = ' '.repeat(indent);
+
+			editor.edit(editBuilder => {
+				editBuilder.insert(new vscode.Position(correctedLineNumber, characterEnd), `\n${spaces}System.debug("Line: ${correctedLineNumber + 2} | ${heirarchy} -> ${text} "+${text});`);
+			});
+
+			// vscode.window.showInformationMessage(`LINE: ${lineNumber} ${heirarchy} -> ${text}`);
 
 		} catch (error) {
 			vscode.window.showErrorMessage(error);
