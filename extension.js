@@ -34,7 +34,7 @@ function activate(context) {
 			
 			//TODO FIX LINE SETTER
 			editor.edit(editBuilder => {
-				editBuilder.insert(new vscode.Position(lineNumber+1, ';'), `\nSystem.debug('Line: ${lineNumber} | ${heirarchy} -> ${text} '+${text});`);
+				editBuilder.insert(new vscode.Position(lineNumber+1, ';'), `\nSystem.debug('Line: ${lineNumber+1} | ${heirarchy} -> ${text} '+${text});`);
 			});
 
 			// vscode.window.showInformationMessage(`LINE: ${lineNumber} ${heirarchy} -> ${text}`);

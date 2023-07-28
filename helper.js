@@ -33,78 +33,6 @@ const getHeirarchy = (fullText, lineNumber, document) => {
     return `${fileName} -> ${String(heirarchy[0])} `;
 }
 
-const getLineNumberAndIndentToPrint = (fullText, lineNumber, document) => {
-    const firstCharPosition = fullText.search(/\S/);
-    let indent = firstCharPosition;
-
-    let trimedfullText = fullText.trim()
-    if (trimedfullText.endsWith(':')) {
-        indent += 4
-    }
-
-    if (firstCharPosition === 0) {
-        return { correctedLineNumber: lineNumber, indent: indent }
-    } else {
-        let tempLineNumber = lineNumber
-        let firstCharPosition = fullText.search(/\S/);
-        while (firstCharPosition !== 0) {
-            tempLineNumber--
-            if (firstCharPosition === 0) {
-                break
-            }
-            let text = document.lineAt(tempLineNumber).text
-            let trimedText = text.trim()
-
-            if (trimedText.endsWith(':')) {
-                break
-            }
-            firstCharPosition = text.search(/\S/);
-        }
-        let startingBrackets = ['[', '{', '(']
-        let endingBrackets = [']', '}', ')']
-        let bracketsStack = []
-
-        while (tempLineNumber !== lineNumber) {
-            tempLineNumber++
-            let text = document.lineAt(tempLineNumber).text
-            let trimedText = [...text.trim()]
-            modifyBracketsStack(trimedText, startingBrackets, bracketsStack, endingBrackets)
-        }
-        while (bracketsStack.length !== 0) {
-            tempLineNumber++
-            let text = document.lineAt(tempLineNumber).text
-            let trimedText = [...text.trim()]
-            modifyBracketsStack(trimedText, startingBrackets, bracketsStack, endingBrackets)
-        }
-
-        return { correctedLineNumber: tempLineNumber, indent: indent }
-    }
-}
-
-const modifyBracketsStack = (trimedText, startingBrackets, bracketsStack, endingBrackets) => {
-    trimedText.forEach(c => {
-        if (startingBrackets.includes(c)) {
-            bracketsStack.push(c)
-        } else if (endingBrackets.includes(c)) {
-            // check if corresponding bracket is in the stack
-            if (c === ']') {
-                // check if the last element is "[", if yes pop it
-                if (bracketsStack[bracketsStack.length - 1] === '[') {
-                    bracketsStack.pop()
-                }
-            } else if (c === '}') {
-                if (bracketsStack[bracketsStack.length - 1] === '{') {
-                    bracketsStack.pop()
-                }
-            } else if (c === ')') {
-                if (bracketsStack[bracketsStack.length - 1] === '(') {
-                    bracketsStack.pop()
-                }
-            }
-        }
-    })
-}
-
 const getFileName = (fileName) => {
 
     const parts = fileName.split('\\');
@@ -119,6 +47,5 @@ const getFileName = (fileName) => {
 
 
 module.exports = {
-    getHeirarchy,
-    getLineNumberAndIndentToPrint
+    getHeirarchy
 }
