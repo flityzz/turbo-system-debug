@@ -12,10 +12,19 @@
   "activationEvents": [],
   "main": "./extension.js",
   "contributes": {
-    "commands": [{
-      "command": "turbo-system-debug.helloWorld",
-      "title": "Hello World"
-    }]
+    "commands": [
+      {
+      "command": "turbo-system-debug.log",
+      "title": "TSD log"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "turbo-system-debug.log",
+        "key": "ctrl+alt+d",
+        "mac": "ctrl+alt+d"
+      }
+    ]
   },
   "scripts": {
     "lint": "eslint .",
