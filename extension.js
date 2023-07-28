@@ -31,13 +31,10 @@ function activate(context) {
 
 			const heirarchy = TSD_HELPER.getHeirarchy(fullText, lineNumber, document);
 
-			const { correctedLineNumber, indent } = TSD_HELPER.getLineNumberAndIndentToPrint(fullText, lineNumber, document);
-			const characterEnd = document.lineAt(correctedLineNumber).range.end.character;
-			const spaces = ' '.repeat(indent);
-
+			
 			//TODO FIX LINE SETTER
 			editor.edit(editBuilder => {
-				editBuilder.insert(new vscode.Position(correctedLineNumber, characterEnd), `\n${spaces}System.debug('Line: ${correctedLineNumber-2} | ${heirarchy} -> ${text} '+${text});`);
+				editBuilder.insert(new vscode.Position(lineNumber+1, ';'), `\nSystem.debug('Line: ${lineNumber} | ${heirarchy} -> ${text} '+${text});`);
 			});
 
 			// vscode.window.showInformationMessage(`LINE: ${lineNumber} ${heirarchy} -> ${text}`);
