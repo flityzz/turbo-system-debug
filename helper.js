@@ -35,22 +35,32 @@ const getHeirarchy = (fullText, lineNumber, document) => {
     return `${fileName} -> ${String(heirarchy[0])} `;
 }
 
-const insertSystemDebug = (lineNumber, text, hierarchy) => {
+function insertSystemDebug(lineNumber, text, hierarchy) {
     const activeEditor = vscode.window.activeTextEditor;
     if (!activeEditor) {
-        return; 
+        return; // No active text editor
     }
 
     activeEditor.edit(editBuilder => {
-        
+        // Find the position of the next semicolon after the given lineNumber
         let currentLine = lineNumber;
         const document = activeEditor.document;
+        let indentation = '';
+
+        // Get the indentation of the current line
+        const lineText = document.lineAt(currentLine).text;
+        const match = lineText.match(/^\s+/);
+        if (match) {
+            indentation = match[0];
+        }
+
         while (currentLine < document.lineCount) {
             const lineText = document.lineAt(currentLine).text;
             const semicolonIndex = lineText.indexOf(';', 0);
             if (semicolonIndex !== -1) {
                 const position = new vscode.Position(currentLine, semicolonIndex + 1);
-                editBuilder.insert(position, `\nSystem.debug('Line: ${currentLine + 1} | ${hierarchy} -> ${text} '+${text});`);
+                const debugStatement = `\n${indentation}System.debug('TSD Line: ${lineNumber + 1} | ${hierarchy} -> ${text} '+${text});`;
+                editBuilder.insert(position, debugStatement);
                 break;
             }
             currentLine++;
