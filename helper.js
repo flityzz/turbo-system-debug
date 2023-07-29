@@ -88,7 +88,10 @@ function insertSystemDebug(lineNumber, text, hierarchy) {
 }
 
 const getFileName = (fileName) => {
-
+    if (!fileName.includes('cls')) {
+        vscode.window.showWarningMessage('no apex file!');
+        throw new Error('no apex file');
+    }
     const parts = fileName.split('\\');
     const fileNameWithExtension = parts[parts.length - 1];
     const className = fileNameWithExtension.slice(0, -4);
