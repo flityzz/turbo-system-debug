@@ -2,7 +2,7 @@
 
 # About Turbo System Debug
 
-turbo-system-debug is a powerful tool designed to simplify and accelerate the process of creating Salesforce System.debug statements. It streamlines the debugging workflow by allowing users to quickly select a variable and generate corresponding debug statements with just a simple keyboard shortcut.
+Turbo System Debug is a powerful tool designed to simplify and accelerate the process of creating Salesforce System.debug statements. It streamlines the debugging workflow by allowing users to quickly select a variable and generate corresponding debug statements with just a simple keyboard shortcut.
 
 Example GIF
 To illustrate the functionality of turbo-system-debug, check out the example GIF below:
