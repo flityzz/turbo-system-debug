@@ -10,7 +10,7 @@ Example GIF
 To illustrate the functionality of turbo-system-debug, check out the example GIF below:
 
 ### Short Cut : `Ctrl+Alt+D`
-<img src="https://imgur.com/a/D0vfrHy"/>
+<img src="https://i.imgur.com/u9Zb5Wf.gif"/>
 
 
 Please note that this README is a work in progress, and more sections and details will be added soon.
