@@ -57,6 +57,14 @@ function insertSystemDebug(lineNumber, text, hierarchy) {
         while (currentLine < document.lineCount) {
             const lineText = document.lineAt(currentLine).text;
             const semicolonIndex = lineText.indexOf(';', 0);
+            
+            if (lineText.endsWith('{')) { 
+                const position = new vscode.Position(currentLine, lineText.length);
+                const debugStatement = `\n${indentation}System.debug('TSD Line: ${lineNumber + 1} | ${hierarchy} -> ${text} '+${text});`;
+                editBuilder.insert(position, debugStatement);
+                break;
+            }
+
             if (semicolonIndex !== -1) {
                 const position = new vscode.Position(currentLine, semicolonIndex + 1);
                 const debugStatement = `\n${indentation}System.debug('TSD Line: ${lineNumber + 1} | ${hierarchy} -> ${text} '+${text});`;
