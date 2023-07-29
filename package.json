@@ -1,6 +1,7 @@
 {
   "name": "turbo-system-debug",
   "displayName": "turbo system debug",
+  "publisher": "flityzz",
   "description": "",
   "version": "0.0.1",
   "engines": {
