@@ -2,6 +2,7 @@
   "name": "turbo-system-debug",
   "displayName": "turbo system debug",
   "publisher": "flityzz",
+  "icon": "images/tsdLOGO.png",
   "description": "",
   "version": "0.0.1",
   "engines": {
