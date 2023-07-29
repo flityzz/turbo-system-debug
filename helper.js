@@ -6,6 +6,11 @@ const getHeirarchy = (fullText, lineNumber, document) => {
 
     let firstCharPosition = fullText.search(/\S/);
     let tempLineNumber = lineNumber;
+
+    if(fullText.includes('(')){
+        tempLineNumber = lineNumber+1;
+    }
+
     const heirarchicalKeywords = ['public ', 'private ', 'protected ', 'global ', 'override ']
 
     let heirarchy = []
@@ -31,8 +36,14 @@ const getHeirarchy = (fullText, lineNumber, document) => {
             heirarchy.push(methodName)
         }
     }
+
+    let returnString = `${fileName} -> ${String(heirarchy[0])}`;
     
-    return `${fileName} -> ${String(heirarchy[0])} `;
+    if (returnString.includes('undefined')) {
+        returnString = returnString.split('-> undefined').join('').trimEnd();
+    }
+    
+    return returnString;
 }
 
 function insertSystemDebug(lineNumber, text, hierarchy) {
@@ -60,14 +71,14 @@ function insertSystemDebug(lineNumber, text, hierarchy) {
             
             if (lineText.endsWith('{')) { 
                 const position = new vscode.Position(currentLine, lineText.length);
-                const debugStatement = `\n${indentation}System.debug('TSD Line: ${lineNumber + 1} | ${hierarchy} -> ${text} '+${text});`;
+                const debugStatement = `\n${indentation}System.debug('${lineNumber + 1} | ${hierarchy} -> ${text} '+${text});`;
                 editBuilder.insert(position, debugStatement);
                 break;
             }
 
             if (semicolonIndex !== -1) {
                 const position = new vscode.Position(currentLine, semicolonIndex + 1);
-                const debugStatement = `\n${indentation}System.debug('TSD Line: ${lineNumber + 1} | ${hierarchy} -> ${text} '+${text});`;
+                const debugStatement = `\n${indentation}System.debug('${lineNumber + 1} | ${hierarchy} -> ${text} '+${text});`;
                 editBuilder.insert(position, debugStatement);
                 break;
             }
