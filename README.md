@@ -1,5 +1,7 @@
 # Turbo System Debug 🚀
 
+> Inspired by <a href="https://github.com/Chakroun-Anas/turbo-console-log">Turbo Console Log</a> 
+
 # About Turbo System Debug
 
 Turbo System Debug is a powerful tool designed to simplify and accelerate the process of creating Salesforce System.debug statements. It streamlines the debugging workflow by allowing users to quickly select a variable and generate corresponding debug statements with just a simple keyboard shortcut.
