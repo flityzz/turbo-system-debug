@@ -9,8 +9,8 @@ Turbo System Debug is a powerful tool designed to simplify and accelerate the pr
 Example GIF
 To illustrate the functionality of turbo-system-debug, check out the example GIF below:
 
-![Example GIF](./example/exampleTSD.gif)
+### Short Cut : `Ctrl+Alt+D`
+<img src="https://imgur.com/a/D0vfrHy"/>
 
-Please note that this is just a sample GIF and doesn't represent the full range of debugging capabilities offered by turbo-system-debug. You can find more details about individual tools and their functionalities in the relevant sections of this repository.
 
 Please note that this README is a work in progress, and more sections and details will be added soon.
