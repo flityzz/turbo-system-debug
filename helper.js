@@ -38,16 +38,16 @@ const getHeirarchy = (fullText, lineNumber, document) => {
 function insertSystemDebug(lineNumber, text, hierarchy) {
     const activeEditor = vscode.window.activeTextEditor;
     if (!activeEditor) {
-        return; // No active text editor
+        return; 
     }
 
     activeEditor.edit(editBuilder => {
-        // Find the position of the next semicolon after the given lineNumber
+        
         let currentLine = lineNumber;
         const document = activeEditor.document;
         let indentation = '';
 
-        // Get the indentation of the current line
+        
         const lineText = document.lineAt(currentLine).text;
         const match = lineText.match(/^\s+/);
         if (match) {
@@ -71,9 +71,7 @@ function insertSystemDebug(lineNumber, text, hierarchy) {
 const getFileName = (fileName) => {
 
     const parts = fileName.split('\\');
-    // Get the last part of the split, which will be the file name with the .cls extension
     const fileNameWithExtension = parts[parts.length - 1];
-    
     const className = fileNameWithExtension.slice(0, -4);
 
     return className;
