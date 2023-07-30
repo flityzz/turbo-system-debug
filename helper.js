@@ -89,15 +89,8 @@ function insertSystemDebug(lineNumber, text, hierarchy) {
 
 const removeAllSystemDebug = async (editor) =>{
 
-    let start, end;
-    let selection = editor.selection;
-    if (selection.isEmpty) {
-        start = 0;
-        end = editor.document.lineCount - 1;
-    } else {
-        start = editor.selection.start.line;
-        end = editor.selection.end.line;
-    }
+    let start = 0, end = editor.document.lineCount - 1;
+    
     let deleteLines = [];
     for (let i = start; i <= end; i++) {
         const line = editor.document.lineAt(i);
