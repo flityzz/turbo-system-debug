@@ -20,7 +20,7 @@
       "title": "TSD log"
       },
       {
-      "command": "turbo-system-debug.removeAllPrint",
+      "command": "turbo-system-debug.removeAllSystemDebug",
       "title": "TSD remove all logs"
       }
     ],
@@ -31,7 +31,7 @@
         "mac": "ctrl+alt+d"
       },
       {
-        "command": "turbo-system-debug.removeAllPrint",
+        "command": "turbo-system-debug.removeAllSystemDebug",
         "key": "ctrl+alt+f",
         "mac": "ctrl+alt+f"
       }

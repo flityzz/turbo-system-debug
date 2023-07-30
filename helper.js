@@ -87,6 +87,34 @@ function insertSystemDebug(lineNumber, text, hierarchy) {
     });
 }
 
+const removeAllSystemDebug = async (editor) =>{
+
+    let start, end;
+    let selection = editor.selection;
+    if (selection.isEmpty) {
+        start = 0;
+        end = editor.document.lineCount - 1;
+    } else {
+        start = editor.selection.start.line;
+        end = editor.selection.end.line;
+    }
+    let deleteLines = [];
+    for (let i = start; i <= end; i++) {
+        const line = editor.document.lineAt(i);
+        const lineText = line.text.trim();
+        if (lineText.startsWith("System.debug('LINE")) {
+            deleteLines.push(line.lineNumber);
+        }
+    }
+    for (let i = 0; i < deleteLines.length; i++) {
+        const line = editor.document.lineAt(deleteLines[i] - i);
+        await editor.edit(editBuilder => {
+            editBuilder.delete(line.rangeIncludingLineBreak);
+        });
+    }
+
+}
+
 const getFileName = (fileName) => {
     if (!fileName.includes('cls')) {
         vscode.window.showWarningMessage('no apex file!');
@@ -103,5 +131,6 @@ const getFileName = (fileName) => {
 
 module.exports = {
     getHeirarchy,
-    insertSystemDebug
+    insertSystemDebug,
+    removeAllSystemDebug
 }

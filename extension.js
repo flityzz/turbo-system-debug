@@ -15,6 +15,7 @@ function activate(context) {
 
 		try {
 			if(!editor){
+				vscode.window.showErrorMessage("No active editor");
 				throw 'No active editor!';
 			}
 
@@ -35,15 +36,22 @@ function activate(context) {
 
 	context.subscriptions.push(disposable);
 
-	disposable = vscode.commands.registerCommand('turbo-system-debug.removeAllPrint', async () => {
+	disposable = vscode.commands.registerCommand('turbo-system-debug.removeAllSystemDebug', async () => {
 
 		const editor = vscode.window.activeTextEditor;
 
-		if (!editor) {
-			vscode.window.showErrorMessage("No active editor");
-		}
+		try {
 
-		
+			if (!editor) {
+				vscode.window.showErrorMessage("No active editor");
+				throw 'No active editor!';
+			}
+
+			TSD_HELPER.removeAllSystemDebug(editor);
+
+		} catch (error) {
+			vscode.window.showErrorMessage(error);
+		}
 
 	})
 
