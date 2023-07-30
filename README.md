@@ -12,5 +12,8 @@ To illustrate the functionality of turbo-system-debug, check out the example GIF
 ### Short Cut : `Ctrl+Alt+D`
 <img src="https://i.imgur.com/u9Zb5Wf.gif"/>
 
+### Short Cut : `Ctrl+Alt+F`
+<img src="https://i.imgur.com/kENrlbM.gif"/>
+
 
 Please note that this README is a work in progress, and more sections and details will be added soon.
