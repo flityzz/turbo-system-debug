@@ -5,12 +5,11 @@ const TSD_HELPER = require('./helper');
  * @param {vscode.ExtensionContext} context
  */
 function activate(context) {
-
-	
 	console.log('turbo-system-debug is now active!');
 
-	
-	let disposable = vscode.commands.registerCommand('turbo-system-debug.log', async () => {
+	let disposable;
+
+	disposable = vscode.commands.registerCommand('turbo-system-debug.log', async () => {
 
 		const editor = vscode.window.activeTextEditor;
 
@@ -36,7 +35,19 @@ function activate(context) {
 
 	context.subscriptions.push(disposable);
 
-	//TODO delete all TSD logs
+	disposable = vscode.commands.registerCommand('turbo-system-debug.removeAllPrint', async () => {
+
+		const editor = vscode.window.activeTextEditor;
+
+		if (!editor) {
+			vscode.window.showErrorMessage("No active editor");
+		}
+
+		
+
+	})
+
+	context.subscriptions.push(disposable);
 }
 
 
