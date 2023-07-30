@@ -8,4 +8,11 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 - Initial release
 
-0.0.3 - minor bugs fixed.
+## [0.0.3] 
+
+- Minor bugs fixed.
+
+## [0.0.4] 
+
+- Adding the remove all logs command(ctrl+alt+f).
+
