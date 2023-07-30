@@ -15,8 +15,7 @@ function activate(context) {
 
 		try {
 			if(!editor){
-				vscode.window.showErrorMessage("No active editor");
-				throw 'No active editor!';
+				TSD_HELPER.showNoActiveEditorMessage();
 			}
 
 			const document = editor.document;
@@ -43,8 +42,7 @@ function activate(context) {
 		try {
 
 			if (!editor) {
-				vscode.window.showErrorMessage("No active editor");
-				throw 'No active editor!';
+				TSD_HELPER.showNoActiveEditorMessage();
 			}
 
 			TSD_HELPER.removeAllSystemDebug(editor);

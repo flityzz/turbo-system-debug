@@ -115,6 +115,11 @@ const removeAllSystemDebug = async (editor) =>{
 
 }
 
+const showNoActiveEditorMessage = () => {
+    vscode.window.showErrorMessage("No active editor");
+	throw 'No active editor!';
+}
+
 const getFileName = (fileName) => {
     if (!fileName.includes('cls')) {
         vscode.window.showWarningMessage('no apex file!');
@@ -132,5 +137,6 @@ const getFileName = (fileName) => {
 module.exports = {
     getHeirarchy,
     insertSystemDebug,
-    removeAllSystemDebug
+    removeAllSystemDebug,
+    showNoActiveEditorMessage
 }
