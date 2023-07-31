@@ -7,10 +7,13 @@ const getHeirarchy = (fullText, lineNumber, document) => {
 
     let firstCharPosition = fullText.search(/\S/);
     let tempLineNumber = lineNumber;
-
-    if(fullText.includes('(')){
+    
+    if(fullText.trim().includes('(')){
         tempLineNumber = lineNumber+1;
+    }else if(fullText.trim().startsWith('@')){
+        tempLineNumber = lineNumber+2;
     }
+
 
     const heirarchicalKeywords = ['public ', 'private ', 'protected ', 'global ', 'override ', '@IsTest ', 'static ']
 
