@@ -111,9 +111,8 @@ const removeAllSystemDebug = async (editor) =>{
 
 }
 
-
 const getFileName = (fileName) => {
-    if (!fileName.includes('cls')) {
+    if (!fileName.endsWith('cls')) {
         TSD_ERRORS.showNoApexFileMessage();
     }
     const parts = fileName.split('\\');
@@ -122,8 +121,6 @@ const getFileName = (fileName) => {
 
     return className;
 }
-
-
 
 module.exports = {
     getHeirarchy,
