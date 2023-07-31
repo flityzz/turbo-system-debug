@@ -24,3 +24,8 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 - Fixing apex file checker.
 
+
+## [0.0.7] 
+
+- Minor bugs fixed.
+
