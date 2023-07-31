@@ -1,5 +1,6 @@
 const vscode = require('vscode');
 const TSD_HELPER = require('./helper');
+const TSD_ERRORS = require('./errorMessages');
 
 /**
  * @param {vscode.ExtensionContext} context
@@ -15,12 +16,17 @@ function activate(context) {
 
 		try {
 			if(!editor){
-				TSD_HELPER.showNoActiveEditorMessage();
+				TSD_ERRORS.showNoActiveEditorMessage();
 			}
 
 			const document = editor.document;
 			const selection = editor.selections[0];
 			const text = document.getText(selection);
+
+			if(text == ''){
+				TSD_ERRORS.showNotextHighlightedMessage();
+			}
+
 			const lineNumber = selection.active.line;
 			const fullText = document.lineAt(selection.end.line).text;
 
@@ -42,7 +48,7 @@ function activate(context) {
 		try {
 
 			if (!editor) {
-				TSD_HELPER.showNoActiveEditorMessage();
+				TSD_ERRORS.showNoActiveEditorMessage();
 			}
 
 			TSD_HELPER.removeAllSystemDebug(editor);

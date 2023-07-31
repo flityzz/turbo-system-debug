@@ -1,4 +1,5 @@
 const vscode = require('vscode');
+const TSD_ERRORS = require('./errorMessages');
 
 const getHeirarchy = (fullText, lineNumber, document) => {
     
@@ -47,9 +48,11 @@ const getHeirarchy = (fullText, lineNumber, document) => {
 }
 
 function insertSystemDebug(lineNumber, text, hierarchy) {
+
     const activeEditor = vscode.window.activeTextEditor;
+    
     if (!activeEditor) {
-        return; 
+        TSD_ERRORS.showNoActiveEditorMessage();
     }
 
     activeEditor.edit(editBuilder => {
@@ -108,15 +111,10 @@ const removeAllSystemDebug = async (editor) =>{
 
 }
 
-const showNoActiveEditorMessage = () => {
-    vscode.window.showErrorMessage("No active editor");
-	throw 'No active editor!';
-}
 
 const getFileName = (fileName) => {
     if (!fileName.includes('cls')) {
-        vscode.window.showWarningMessage('no apex file!');
-        throw new Error('no apex file');
+        TSD_ERRORS.showNoApexFileMessage();
     }
     const parts = fileName.split('\\');
     const fileNameWithExtension = parts[parts.length - 1];
@@ -130,6 +128,5 @@ const getFileName = (fileName) => {
 module.exports = {
     getHeirarchy,
     insertSystemDebug,
-    removeAllSystemDebug,
-    showNoActiveEditorMessage
+    removeAllSystemDebug
 }
