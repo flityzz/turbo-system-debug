@@ -10,7 +10,9 @@ const getHeirarchy = (fullText, lineNumber, document) => {
     
     if(fullText.trim().includes('(')){
         tempLineNumber = lineNumber+1;
-    }else if(fullText.trim().startsWith('@')){
+    }
+    
+    if(fullText.trim().startsWith('@')){
         tempLineNumber = lineNumber+2;
     }
 
@@ -75,11 +77,11 @@ function insertSystemDebug(lineNumber, text, hierarchy) {
             const lineText = document.lineAt(currentLine).text;
             const semicolonIndex = lineText.indexOf(';', 0);
 
-            if (lineText.trim().startsWith('return')) { 
-                const position = new vscode.Position(currentLine-1, lineText.length);
-                const debugStatement = `\n${indentation}System.debug('LINE ${lineNumber + 1} | ${hierarchy} -> ${text} '+${text});`;
+            if (lineText.trim().startsWith('return')) {
+                const position = new vscode.Position(currentLine, 0);
+                const debugStatement = `${indentation}System.debug('LINE ${lineNumber + 1} | ${hierarchy} -> ${text} '+${text});\n`;
                 editBuilder.insert(position, debugStatement);
-                break;
+                break; 
             }
             
             if (lineText.endsWith('{')) { 
