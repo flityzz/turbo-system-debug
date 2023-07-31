@@ -16,3 +16,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 - Adding the remove all logs command(ctrl+alt+f).
 
+## [0.0.5] 
+
+- Minor bugs fixed.
+
