@@ -20,3 +20,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 - Minor bugs fixed.
 
+## [0.0.6] 
+
+- Fixing apex file checker.
+
