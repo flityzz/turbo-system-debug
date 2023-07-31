@@ -74,6 +74,13 @@ function insertSystemDebug(lineNumber, text, hierarchy) {
         while (currentLine < document.lineCount) {
             const lineText = document.lineAt(currentLine).text;
             const semicolonIndex = lineText.indexOf(';', 0);
+
+            if (lineText.trim().startsWith('return')) { 
+                const position = new vscode.Position(currentLine-1, lineText.length);
+                const debugStatement = `\n${indentation}System.debug('LINE ${lineNumber + 1} | ${hierarchy} -> ${text} '+${text});`;
+                editBuilder.insert(position, debugStatement);
+                break;
+            }
             
             if (lineText.endsWith('{')) { 
                 const position = new vscode.Position(currentLine, lineText.length);
