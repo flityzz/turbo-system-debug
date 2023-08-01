@@ -22,17 +22,27 @@ function activate(context) {
 			const document = editor.document;
 			const selection = editor.selections[0];
 			const text = document.getText(selection);
+			let formattedSOQL = '';
 
 			if(text == ''){
 				TSD_ERRORS.showNotextHighlightedMessage();
 			}
 
+			const sqlRegex = /\[\s*([\s\S]*?)\s*\]/;
+			const match = text.match(sqlRegex);
+			
+			if(match){
+				const sqlQuery = match[1].trim();
+				formattedSOQL = TSD_HELPER.removeCommentsAndFormatSOQL(sqlQuery);
+			}
+
 			const lineNumber = selection.active.line;
-			const fullText = document.lineAt(selection.end.line).text;
+			const fullText = formattedSOQL != '' ? formattedSOQL : document.lineAt(selection.end.line).text;
 
 			const heirarchy = TSD_HELPER.getHeirarchy(fullText, lineNumber, document);
 
-			TSD_HELPER.insertSystemDebug(lineNumber, text, heirarchy);
+			let sqlOrText = formattedSOQL != '' ? formattedSOQL : text;
+			TSD_HELPER.insertSystemDebug(lineNumber, sqlOrText, heirarchy);	
 
 		} catch (error) {
 			vscode.window.showErrorMessage(error);

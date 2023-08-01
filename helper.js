@@ -43,6 +43,31 @@ const getHeirarchy = (fullText, lineNumber, document) => {
         }
     }
 
+    if(firstCharPosition == 0){
+        //SQL text
+        while(tempLineNumber != 0){
+            let text = document.lineAt(tempLineNumber).text
+            let trimedText = text.trim()
+            firstCharPosition = text.search(/\S/);
+            if (heirarchicalKeywords.some(v => trimedText.startsWith(v))) {
+                let splittedWords = trimedText.split(' ')
+            
+                let methodName;
+                splittedWords.map(word => {
+                    if(word.includes('(')){
+                        methodName = word.split('(')[0];
+                    }
+                });
+                
+                heirarchy.push(methodName+'()')
+                if(heirarchy.length > 0){
+                    break;
+                }
+            }
+            tempLineNumber--;
+        }
+    }
+
     let returnString = `${fileName} -> ${String(heirarchy[0])}`;
     
     if (returnString.includes('undefined')) {
@@ -52,7 +77,7 @@ const getHeirarchy = (fullText, lineNumber, document) => {
     return returnString;
 }
 
-function insertSystemDebug(lineNumber, text, hierarchy) {
+const insertSystemDebug = (lineNumber, text, hierarchy) => {
 
     const activeEditor = vscode.window.activeTextEditor;
     
@@ -123,6 +148,23 @@ const removeAllSystemDebug = async (editor) =>{
 
 }
 
+const removeCommentsAndFormatSOQL = (soqlText) => {
+    const lines = soqlText.split('\n');
+    let formattedSOQL = '';
+  
+    for (const line of lines) {
+      const cleanedLine = line.replace(/\/\/.*/, '');
+  
+      const trimmedLine = cleanedLine.trim();
+  
+      if (trimmedLine) {
+        formattedSOQL += trimmedLine + ' ';
+      }
+    }
+    formattedSOQL= '[' + formattedSOQL.trim() + ']';
+    return formattedSOQL;
+}
+
 const getFileName = (fileName) => {
     if (!fileName.endsWith('cls')) {
         TSD_ERRORS.showNoApexFileMessage();
@@ -137,5 +179,6 @@ const getFileName = (fileName) => {
 module.exports = {
     getHeirarchy,
     insertSystemDebug,
-    removeAllSystemDebug
+    removeAllSystemDebug,
+    removeCommentsAndFormatSOQL
 }
