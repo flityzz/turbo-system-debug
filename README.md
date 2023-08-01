@@ -13,7 +13,7 @@ To illustrate the functionality of turbo-system-debug, check out the example GIF
 <img src="https://i.imgur.com/u9Zb5Wf.gif"/>
 
 
-### Short Cut : `SOQL Recognition`
+### `SOQL Recognition`
 <img src="https://i.imgur.com/tlxF5e3.gif"/>
 
 
