@@ -70,8 +70,8 @@ const getHeirarchy = (fullText, lineNumber, document) => {
 
     let returnString = `${fileName} -> ${String(heirarchy[0])}`;
     
-    if (returnString.includes('undefined')) {
-        returnString = returnString.split('-> undefined').join('').trimEnd();
+    if (returnString.includes('undefined()')) {
+        returnString = returnString.split('-> undefined()').join('').trimEnd();
     }
     
     return returnString;
