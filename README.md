@@ -12,8 +12,9 @@ To illustrate the functionality of turbo-system-debug, check out the example GIF
 ### Short Cut : `Ctrl+Alt+D`
 <img src="https://i.imgur.com/u9Zb5Wf.gif"/>
 
+
 ### Short Cut : `SOQL Recognition`
-<img src="https://i.imgur.com/Lv4bL2s.mp4"/>
+<img src="https://i.imgur.com/tlxF5e3.gif"/>
 
 
 ### Short Cut : `Ctrl+Alt+F`
