@@ -33,3 +33,10 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 - Adding repository link.
 
+## [0.0.9] 
+
+- Adding SOQL Recognition.
+- Improving debug visualization.
+- Minor bug fixes.
+- Adding description
+
