@@ -36,7 +36,7 @@ function activate(context) {
 				formattedSOQL = TSD_HELPER.removeCommentsAndFormatSOQL(sqlQuery);
 			}
 
-			const lineNumber = selection.active.line;
+			const lineNumber = formattedSOQL != '' ? selection.start.line : selection.active.line;
 			const fullText = formattedSOQL != '' ? formattedSOQL : document.lineAt(selection.end.line).text;
 
 			const heirarchy = TSD_HELPER.getHeirarchy(fullText, lineNumber, document);

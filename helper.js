@@ -104,21 +104,21 @@ const insertSystemDebug = (lineNumber, text, hierarchy) => {
 
             if (lineText.trim().startsWith('return')) {
                 const position = new vscode.Position(currentLine, 0);
-                const debugStatement = `${indentation}System.debug('LINE ${lineNumber + 1} | ${hierarchy} -> ${text} '+${text});\n`;
+                const debugStatement = printDebugStatement(indentation,lineNumber,hierarchy,text,true);
                 editBuilder.insert(position, debugStatement);
                 break; 
             }
             
             if (lineText.endsWith('{')) { 
                 const position = new vscode.Position(currentLine, lineText.length);
-                const debugStatement = `\n${indentation}System.debug('LINE ${lineNumber + 1} | ${hierarchy} -> ${text} '+${text});`;
+                let debugStatement = printDebugStatement(indentation,lineNumber,hierarchy,text,false);
                 editBuilder.insert(position, debugStatement);
                 break;
             }
 
             if (semicolonIndex !== -1) {
                 const position = new vscode.Position(currentLine, semicolonIndex + 1);
-                const debugStatement = `\n${indentation}System.debug('LINE ${lineNumber + 1} | ${hierarchy} -> ${text} '+${text});`;
+                const debugStatement = printDebugStatement(indentation,lineNumber,hierarchy,text,false);
                 editBuilder.insert(position, debugStatement);
                 break;
             }
@@ -135,7 +135,7 @@ const removeAllSystemDebug = async (editor) =>{
     for (let i = start; i <= end; i++) {
         const line = editor.document.lineAt(i);
         const lineText = line.text.trim();
-        if (lineText.startsWith("System.debug('LINE")) {
+        if (lineText.startsWith("System.debug(") && lineText.endsWith(");")) {
             deleteLines.push(line.lineNumber);
         }
     }
@@ -174,6 +174,18 @@ const getFileName = (fileName) => {
     const className = fileNameWithExtension.slice(0, -4);
 
     return className;
+}
+
+const printDebugStatement = (indentation, lineNumber, hierarchy, text, isSQL) => {
+    let returnString = '';
+    
+    if(isSQL){
+        returnString =  `${indentation}System.debug('###########@@ LINE ${lineNumber + 1} -> ${hierarchy} -> SOQL Query @@###########');\n${indentation}System.debug(${text});\n`;
+    }else{
+        returnString = `\n${indentation}System.debug('###########@@ LINE ${lineNumber + 1} -> ${hierarchy} -> ${text}  @@###########');\n${indentation}System.debug(${text});`;
+    }
+    
+    return returnString;
 }
 
 module.exports = {
