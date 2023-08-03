@@ -176,11 +176,11 @@ const getFileName = (fileName) => {
     return className;
 }
 
-const printDebugStatement = (indentation, lineNumber, hierarchy, text, isSQL) => {
+const printDebugStatement = (indentation, lineNumber, hierarchy, text, isReturn) => {
     let returnString = '';
     
-    if(isSQL){
-        returnString =  `${indentation}System.debug('###########@@ LINE ${lineNumber + 1} -> ${hierarchy} -> SOQL Query @@###########');\n${indentation}System.debug(${text});\n`;
+    if(isReturn){
+        returnString = `${indentation}System.debug('###########@@ LINE ${lineNumber + 1} -> ${hierarchy} -> ${text} @@###########');\n${indentation}System.debug(${text});\n`;
     }else{
         returnString = `\n${indentation}System.debug('###########@@ LINE ${lineNumber + 1} -> ${hierarchy} -> ${text}  @@###########');\n${indentation}System.debug(${text});`;
     }
