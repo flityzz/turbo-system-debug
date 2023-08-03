@@ -187,7 +187,8 @@ const getIndentation = (document,currentLine) =>{
     let lineText = document.lineAt(currentLine).text;
 
     if(lineText.includes('(') || lineText.includes(')')){
-        lineText = document.lineAt(currentLine+1).text
+        currentLine++;
+        lineText = document.lineAt(currentLine).text
     }
 
     const match = lineText.match(/^\s+/);
