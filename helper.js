@@ -89,14 +89,8 @@ const insertSystemDebug = (lineNumber, text, hierarchy) => {
         
         let currentLine = lineNumber;
         const document = activeEditor.document;
-        let indentation = '';
+        let indentation = getIndentation(document,currentLine);
 
-        
-        const lineText = document.lineAt(currentLine).text;
-        const match = lineText.match(/^\s+/);
-        if (match) {
-            indentation = match[0];
-        }
 
         while (currentLine < document.lineCount) {
             const lineText = document.lineAt(currentLine).text;
@@ -186,6 +180,19 @@ const printDebugStatement = (indentation, lineNumber, hierarchy, text, isReturn)
     }
     
     return returnString;
+}
+
+const getIndentation = (document,currentLine) =>{
+
+    let lineText = document.lineAt(currentLine).text;
+
+    if(lineText.includes('(') || lineText.includes(')')){
+        lineText = document.lineAt(currentLine+1).text
+    }
+
+    const match = lineText.match(/^\s+/);
+    
+    return match[0];
 }
 
 module.exports = {
