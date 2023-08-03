@@ -8,39 +8,41 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 - Initial release
 
-## [0.0.3] 
+## [0.0.3]
 
 - Minor bugs fixed.
 
-## [0.0.4] 
+## [0.0.4]
 
 - Adding the remove all logs command(ctrl+alt+f).
 
-## [0.0.5] 
+## [0.0.5]
 
 - Minor bugs fixed.
 
-## [0.0.6] 
+## [0.0.6]
 
 - Fixing apex file checker.
 
-
-## [0.0.7] 
+## [0.0.7]
 
 - Minor bugs fixed.
 
-## [0.0.8] 
+## [0.0.8]
 
 - Adding repository link.
 
-## [0.0.9] 
+## [0.0.9]
 
 - Adding SOQL Recognition.
 - Improving debug visualization.
 - Minor bug fixes.
 - Adding description
 
-## [0.1.0] 
+## [0.1.0]
 
 - minor updates.
 
+## [0.1.1]
+
+- Improving identation.
