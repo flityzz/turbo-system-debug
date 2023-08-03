@@ -40,3 +40,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 - Minor bug fixes.
 - Adding description
 
+## [0.1.0] 
+
+- minor updates.
+
