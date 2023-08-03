@@ -46,3 +46,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## [0.1.1]
 
 - Improving identation.
+
+## [0.1.2]
+
+- Adjusting system.debug insertions.
