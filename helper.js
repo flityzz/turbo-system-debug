@@ -91,6 +91,28 @@ const insertSystemDebug = (lineNumber, text, hierarchy) => {
         const document = activeEditor.document;
         let indentation = getIndentation(document,currentLine);
 
+        let typeArr = [
+            'Integer ',
+            'String ',
+            'Boolean ',
+            'Date ',
+            'Datetime ',
+            'Decimal ',
+            'Double ',
+            'Long ',
+            'Object ',
+            'Id ',
+            'List ',
+            'Set ',
+            'Map ',
+            'sObject ',
+            'Blob ',
+            'Time ',
+            'Enum ',
+            'Interface ',
+            'Void ',
+            'Any ',
+          ];
 
         while (currentLine < document.lineCount) {
             const lineText = document.lineAt(currentLine).text;
@@ -103,7 +125,7 @@ const insertSystemDebug = (lineNumber, text, hierarchy) => {
                 break; 
             }
             
-            if (lineText.endsWith('{')) { 
+            if (lineText.endsWith('{') && typeArr.every(type => !lineText.includes(type.trim()))) { 
                 const position = new vscode.Position(currentLine, lineText.length);
                 let debugStatement = printDebugStatement(indentation,lineNumber,hierarchy,text,false);
                 editBuilder.insert(position, debugStatement);
@@ -183,12 +205,30 @@ const printDebugStatement = (indentation, lineNumber, hierarchy, text, isReturn)
 }
 
 const getIndentation = (document,currentLine) =>{
+    const heirarchicalKeywords = ['public ', 'private ', 'protected ', 'global ', 'override ', '@IsTest ', 'static ', '(', ')','{'];
 
     let lineText = document.lineAt(currentLine).text;
 
-    if(lineText.includes('(') || lineText.includes(')')){
+    let count = 0;
+    heirarchicalKeywords.map(word => {
+        if(lineText.includes(word)){
+            count++;
+        }
+    });
+
+    if(count > 2 ){
         currentLine++;
         lineText = document.lineAt(currentLine).text
+
+        if(lineText.includes('{')){
+
+            while(!lineText.includes('}')){
+                lineText = document.lineAt(currentLine).text;
+                currentLine++; 
+            }
+        
+            lineText = document.lineAt(currentLine-2).text
+        }
     }
 
     const match = lineText.match(/^\s+/);
