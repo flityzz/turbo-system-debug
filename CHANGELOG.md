@@ -50,3 +50,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## [0.1.2]
 
 - Adjusting system.debug insertions.
+
+## [0.1.3]
+
+- Adjusting system.debug insertions.
