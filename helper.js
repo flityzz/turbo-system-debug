@@ -1,5 +1,6 @@
 const vscode = require('vscode');
 const TSD_ERRORS = require('./errorMessages');
+const { link } = require('fs');
 
 const getHeirarchy = (fullText, lineNumber, document) => {
     
@@ -117,6 +118,7 @@ const insertSystemDebug = (lineNumber, text, hierarchy) => {
         while (currentLine < document.lineCount) {
             const lineText = document.lineAt(currentLine).text;
             const semicolonIndex = lineText.indexOf(';', 0);
+            const lastCurlyBrace = lineText.indexOf('}', 0);
 
             if (lineText.trim().startsWith('return')) {
                 const position = new vscode.Position(currentLine, 0);
@@ -135,6 +137,13 @@ const insertSystemDebug = (lineNumber, text, hierarchy) => {
             if (semicolonIndex !== -1) {
                 const position = new vscode.Position(currentLine, semicolonIndex + 1);
                 const debugStatement = printDebugStatement(indentation,lineNumber,hierarchy,text,false);
+                editBuilder.insert(position, debugStatement);
+                break;
+            }
+
+            if (lastCurlyBrace !== -1) {
+                const position = new vscode.Position(currentLine, 0);
+                const debugStatement = printDebugStatement(indentation,lineNumber,hierarchy,text,true);
                 editBuilder.insert(position, debugStatement);
                 break;
             }
