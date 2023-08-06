@@ -240,5 +240,6 @@ module.exports = {
     getHeirarchy,
     insertSystemDebug,
     removeAllSystemDebug,
-    removeCommentsAndFormatSOQL
+    removeCommentsAndFormatSOQL,
+    getFileName
 }
