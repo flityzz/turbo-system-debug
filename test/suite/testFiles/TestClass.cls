@@ -27,4 +27,25 @@ public without sharing class TestClass {
   public static List<Account> testSelectParamLine(Decimal annualRevenue) {
     return [SELECT Name FROM Account WHERE AnnualRevenue >= :annualRevenue];
   }
+
+  @isTest
+  static void populateCourses_sets3Courses() {
+    // GIVEN
+    BeforeRenderHookController controller = new BeforeRenderHookController();
+
+    // WHEN
+    controller.populateCourses();
+
+    // THEN
+    List<String> expectedCourses = new List<String>{
+      'Irrigation Systems',
+      'Soils',
+      'Organic Crops'
+    };
+    System.assertEquals(
+      expectedCourses,
+      controller.courses,
+      'Courses where not correctly populated'
+    );
+  }
 }
