@@ -1,6 +1,5 @@
 const vscode = require('vscode');
 const TSD_ERRORS = require('./errorMessages');
-const { link } = require('fs');
 
 const getHeirarchy = (fullText, lineNumber, document) => {
     
