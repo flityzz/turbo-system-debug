@@ -118,7 +118,7 @@ const insertSystemDebug = (lineNumber, text, hierarchy) => {
         while (currentLine < document.lineCount) {
             const lineText = document.lineAt(currentLine).text;
             const semicolonIndex = lineText.indexOf(';', 0);
-            const lastCurlyBrace = lineText.indexOf('}', 0);
+            const lastCurlyBrace = lineText.trim().endsWith('}');
 
             if (lineText.trim().startsWith('return')) {
                 const position = new vscode.Position(currentLine, 0);
@@ -141,7 +141,7 @@ const insertSystemDebug = (lineNumber, text, hierarchy) => {
                 break;
             }
 
-            if (lastCurlyBrace !== -1) {
+            if (lastCurlyBrace) {
                 const position = new vscode.Position(currentLine, 0);
                 const debugStatement = printDebugStatement(indentation,lineNumber,hierarchy,text,true);
                 editBuilder.insert(position, debugStatement);
