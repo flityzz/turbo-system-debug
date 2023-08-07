@@ -249,5 +249,6 @@ module.exports = {
     insertSystemDebug,
     removeAllSystemDebug,
     removeCommentsAndFormatSOQL,
-    getFileName
+    getFileName,
+    printDebugStatement
 }

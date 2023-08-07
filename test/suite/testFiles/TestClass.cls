@@ -27,6 +27,4 @@ public without sharing class TestClass {
   public static List<Account> testSelectParamLine(Decimal annualRevenue) {
     return [SELECT Name FROM Account WHERE AnnualRevenue >= :annualRevenue];
   }
-
 }
-  
