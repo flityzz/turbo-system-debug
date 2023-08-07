@@ -1,6 +1,6 @@
 # Turbo System Debug 🚀
 
-> Inspired by <a href="https://github.com/Chakroun-Anas/turbo-console-log">Turbo Console Log</a> 
+> Inspired by <a href="https://github.com/Chakroun-Anas/turbo-console-log">Turbo Console Log</a>
 
 # About Turbo System Debug
 
@@ -10,15 +10,33 @@ Example GIF
 To illustrate the functionality of turbo-system-debug, check out the example GIF below:
 
 ### Short Cut : `Ctrl+Alt+D`
+
 <img src="https://i.imgur.com/u9Zb5Wf.gif"/>
 
-
 ### `SOQL Recognition`
+
 <img src="https://i.imgur.com/tlxF5e3.gif"/>
 
-
 ### Short Cut : `Ctrl+Alt+F`
+
 <img src="https://i.imgur.com/kENrlbM.gif"/>
 
+### Prerequisites
 
-Please note that this README is a work in progress, and more sections and details will be added soon.
+Before you begin, ensure you have the following installed:
+
+- Git: Download and Install Git
+
+- Node.js: Make sure to have Node.js and npm (Node Package Manager) installed.
+
+- Clone the Repository
+
+Open your terminal or command prompt.
+Navigate to the directory where you want to clone the repository using the cd command.
+Run the following command to clone the repository:
+
+git clone https://github.com/flityzz/turbo-system-debug.git
+
+install the project's dependencies using npm:
+
+npm install.
